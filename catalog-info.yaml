@@ -1,0 +1,43 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "perjantai-app"
+  description: "A cool quarkus app"
+  annotations:
+    argocd/app-name: perjantai-app-dev
+    backstage.io/kubernetes-id: perjantai-app
+    backstage.io/kubernetes-namespace: perjantai-app-dev
+    janus-idp.io/tekton-enabled: 'true'
+    janus-idp.io/tekton: perjantai-app
+    backstage.io/source-location: url:https://github.com/RedHatNordicsSA/perjantai-app
+    backstage.io/techdocs-ref: url:https://github.com/RedHatNordicsSA/perjantai-app
+    gitlab.com/project-slug: RedHatNordicsSA/perjantai-app
+    quay.io/repository-slug: "/perjantai-app"
+  tags:
+    - java
+    - quarkus
+  links:
+    - url: https://devspaces.apps.rh-ocp-01.cool.lab/#https://github.com/RedHatNordicsSA/perjantai-app?che-editor=che-incubator/che-code/insiders&devfilePath=.devfile-vscode.yaml
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+    - url: https://devspaces.apps.rh-ocp-01.cool.lab/#https://github.com/RedHatNordicsSA/perjantai-app?che-editor=che-incubator/che-idea/latest&devfilePath=.devfile-intellij.yaml
+      title: OpenShift Dev Spaces (JetBrains IntelliJ)
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "group:default/cool-lab"
+  providesApis:
+    - "perjantai-app"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: "perjantai-app"
+  description: "A cool quarkus app"
+spec:
+  type: openapi
+  lifecycle: production
+  owner: "group:default/cool-lab"
+  definition:
+    $text: ./openapi.yaml
